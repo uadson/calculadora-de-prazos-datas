@@ -40,17 +40,17 @@ while True:
 
 
 	# 5 Convertendo a string para o tipo data - saída 0000-00-00
-	date = datetime.strptime(string, '%d%m%Y')
+	data = datetime.strptime(string, '%d%m%Y')
 
 	
 	# 6 Obtendo o mês e o ano relativo a data informada
-	mes = date.month
-	ano = date.year
+	mes = data.month
+	ano = data.year
 
 
 	# 7 Obtendo data final após prazo informado
 
-	final_date = date.fromordinal(date.toordinal()+(prazo))
+	data_final = data.fromordinal(data.toordinal()+(prazo))
 
 
 	# 8 Obtendo o dia útil da semana com base na data final
@@ -59,23 +59,23 @@ while True:
 
 
 	# 9 Caso a data final caia em um sábado ou domingo, deverá retornar o próximo dia útil
-	if dias[final_date.weekday()] == 'Sábado':
+	if dias[data_final.weekday()] == 'Sábado':
 		# o dia útil será segunda-feira
-		dia_util = date.fromordinal(final_date.toordinal()+2)
+		dia_util = data.fromordinal(data_final.toordinal()+2)
 		# obtem o dia da semana conforme o dia útil
 		dia_da_semana = dias[dia_util.weekday()]
 
-	elif dias[final_date.weekday()] == 'Domingo':
-		dia_util = date.fromordinal(final_date.toordinal()+1)
+	elif dias[data_final.weekday()] == 'Domingo':
+		dia_util = data.fromordinal(data_final.toordinal()+1)
 		dia_da_semana = dias[dia_util.weekday()]
 
 	else:
-		dia_util = final_date
-		dia_da_semana = dias[final_date.weekday()]
+		dia_util = data_final
+		dia_da_semana = dias[data_final.weekday()]
 
 	
 	# 10 Obtendo o mês baseadao na data final, quando esta cai no mês subsequente	
-	prox_mes = final_date.month
+	prox_mes = data_final.month
 
 	
 	# 11 Organizando o calendários com as datas obtidas
