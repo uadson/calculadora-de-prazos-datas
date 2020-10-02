@@ -57,18 +57,21 @@ while True:
 	dias = ('Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 
 		'Sexta-Feira', 'Sábado', 'Domingo')
 
-	dia_util = dias[final_date.weekday()]
-
 
 	# 9 Caso a data final caia em um sábado ou domingo, deverá retornar o próximo dia útil
-	if dias[final_date.weekday()] == 5 or dias[final_date.weekday()] == 6:
-		prox_dia_util = date.fromordinal(final_date.toordinal()+2)
-		# o dia útil então será baseado nesta nova data
-		dia_util = dias[prox_dia_util.weekday()]
+	if dias[final_date.weekday()] == 'Sábado':
+		# o dia útil será segunda-feira
+		dia_util = date.fromordinal(final_date.toordinal()+2)
+		# obtem o dia da semana conforme o dia útil
+		dia_da_semana = dias[dia_util.weekday()]
+
+	elif dias[final_date.weekday()] == 'Domingo':
+		dia_util = date.fromordinal(final_date.toordinal()+1)
+		dia_da_semana = dias[dia_util.weekday()]
 
 	else:
-
-		dia_util = dias[final_date.weekday()]
+		dia_util = final_date
+		dia_da_semana = dias[final_date.weekday()]
 
 	
 	# 10 Obtendo o mês baseadao na data final, quando esta cai no mês subsequente	
@@ -101,10 +104,10 @@ while True:
 
 
 	# 12 Formatando a saída para o modelo de data desejado 00/00/0000 (data final)
-	data_fim = final_date.strftime('%d/%m/%Y')
+	data_format = dia_util.strftime('%d/%m/%Y')
 
 	# apresentando o resultado
-	print(f'Prazo Final: {data_fim}, {dia_util}')
+	print(f'Prazo Final: {data_format}, {dia_da_semana}')
 
 	linha()
 
